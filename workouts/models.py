@@ -24,10 +24,17 @@ class MuscleAnatomy(models.Model):
 
 
 class Workouts(models.Model):
+    LEVEL_CHOICES = [
+        ('Beginner','Beginner'),
+        ('Intermediate','Intermediate'),
+        ('Advanced','Advanced'),
+        ('Master','Master')
+    ]
     name = models.CharField(max_length = 100)
     workoutType = models.ManyToManyField(WorkoutTypes)
     description = models.TextField()
     instructions = models.TextField()
+    level = models.CharField(max_length = 15, choices=LEVEL_CHOICES, blank = True, default ="")
     duration = models.IntegerField()
     repetition = models.CharField(max_length = 20)
     restTime = models.CharField(max_length = 20)
