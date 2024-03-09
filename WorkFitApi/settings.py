@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'workouts',
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
