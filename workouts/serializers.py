@@ -23,5 +23,5 @@ class WorkoutsSerializer(ModelSerializer):
     class Meta:
         model = Workouts
         fields = ["id", "name", "workoutType", "description",
-                  "instructions", "duration", "repetition", 
+                  "instructions", "level", "duration", "repetition", 
                   "restTime", "targetMuscles", "accessories"]
