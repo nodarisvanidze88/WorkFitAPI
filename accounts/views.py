@@ -1,5 +1,7 @@
 from .models import UserModel
 from django.contrib.auth import authenticate, login, logout
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -8,7 +10,14 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 class UserRegistrationView(APIView):
     permission_classes = [AllowAny]
-
+    @swagger_auto_schema(request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=['username', 'Password'],
+            properties = {
+                'username': openapi.Schema(type=openapi.TYPE_STRING),
+                'password': openapi.Schema(type=openapi.TYPE_STRING)
+            }
+    ))
 
     def post(self, request):
         username = request.data.get('username')
@@ -26,8 +35,14 @@ class UserRegistrationView(APIView):
 
 class UserLoginView(APIView):
     permission_classes = [AllowAny]
-
-
+    @swagger_auto_schema(request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=['username', 'Password'],
+            properties = {
+                'username': openapi.Schema(type=openapi.TYPE_STRING),
+                'password': openapi.Schema(type=openapi.TYPE_STRING)
+            }
+    ))
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
@@ -43,8 +58,6 @@ class UserLoginView(APIView):
 
 
 class UserLogoutView(APIView):
-
-
     def post(self, request):
         logout(request)
         return Response({'success': 'User logged out successfully'}, status=status.HTTP_200_OK)
