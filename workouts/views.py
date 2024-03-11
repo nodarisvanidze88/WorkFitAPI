@@ -16,7 +16,7 @@ class MuscleAnatomyViewset(viewsets.ModelViewSet):
 class WorkoutsViewset(viewsets.ModelViewSet):
     queryset = Workouts.objects.all()
     serializer_class = WorkoutsSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.AllowAny]
 
 class WorkoutTypesViewset(viewsets.ModelViewSet):
     queryset = WorkoutTypes.objects.all()

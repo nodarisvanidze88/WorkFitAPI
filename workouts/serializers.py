@@ -4,17 +4,17 @@ from .models import Accessories, Workouts, WorkoutTypes, MuscleAnatomy
 class AccessoriesSerializer(ModelSerializer):
     class Meta:
         model = Accessories
-        fields = '__all__'
+        fields = ['accessories']
 
 class WorkoutTypesSerializer(ModelSerializer):
     class Meta:
         model = WorkoutTypes
-        fields = '__all__'
+        fields = ['workoutType']
 
 class MuscleAnatomySerializer(ModelSerializer):
     class Meta:
         model = MuscleAnatomy
-        fields = '__all__'
+        fields = ['muscleName']
 
 class WorkoutsSerializer(ModelSerializer):
     workoutType = WorkoutTypesSerializer(many = True)
