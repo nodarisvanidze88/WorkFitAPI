@@ -1,0 +1,31 @@
+version: "1.0"
+
+services:
+  db:
+    image: postgres:16
+    volumes:
+      - postgres_data:/var/lib/postgres/data
+    environment:
+      POSTGRES_DB: WorkFitApi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+
+  workfit:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      DB_NAME: WorkFitApi
+      DB_USER: postgres
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: db
+      DB_PORT: 5432
+    depends_on:
+      - db
+volumes:
+  postgres_data:
